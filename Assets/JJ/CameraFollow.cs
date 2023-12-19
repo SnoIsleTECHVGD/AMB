@@ -5,17 +5,20 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target = null;
+    [SerializeField] private float smoothSpeed = 10f; // Adjust the smooth speed as needed
+    [SerializeField] private Vector3 offset = new Vector3(0f, 2f, -5f); // Adjust the offset as needed
 
-    private Vector3 offset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        offset = transform.position = target.position;
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z) + offset, Time.deltaTime * 3);
+        // Calculate the desired position
+        Vector3 desiredPosition = target.position + offset;
+        desiredPosition.y = transform.position.y;
+
+        // Smoothly move the camera to the desired position
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
+        transform.position = smoothedPosition;
+
+        // Set the camera rotation to look at the player
+        transform.LookAt(target.position);
     }
 }
