@@ -7,7 +7,7 @@ public class Start : MonoBehaviour
 {
     void OnMouseDown()
     {
-        SceneManager.LoadScene("1");
+        SceneManager.LoadScene("JJ");
 
     }
 }
