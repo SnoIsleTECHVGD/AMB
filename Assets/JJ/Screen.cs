@@ -6,7 +6,7 @@ public class Screen : MonoBehaviour
 {
     [SerializeField] private Transform target = null;
 
-    private Vector3 offset;
+    public Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,3 +19,4 @@ public class Screen : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z) + offset, Time.deltaTime * 3);
     }
 }
+ 
