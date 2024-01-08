@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  numOfHearts: 3
+  numOfHearts: 1
   hearts:
   - {fileID: 1648789025}
   - {fileID: 202650885}
