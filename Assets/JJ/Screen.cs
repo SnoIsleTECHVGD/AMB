@@ -7,11 +7,6 @@ public class Screen : MonoBehaviour
     [SerializeField] private Transform target = null;
 
     public Vector3 offset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        offset = transform.position = target.position;
-    }
 
     // Update is called once per frame
     void LateUpdate()
@@ -19,4 +14,3 @@ public class Screen : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z) + offset, Time.deltaTime * 3);
     }
 }
- 
