@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -36,14 +34,14 @@ public class Enemy_behaviour : MonoBehaviour
 
     void Update()
     {
-        
+
 
         if (!attackMode)
         {
             Move();
         }
 
-        if (!InsideOfLimits() && !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
+        //if (!InsideOfLimits() && !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
         {
             SelectTarget();
         }
@@ -80,7 +78,7 @@ public class Enemy_behaviour : MonoBehaviour
             target = trig.gameObject.transform;
             inRange = true;
             //Debug.Log("triggered");
-            Flip();
+            //Flip();
         }
     }
 
@@ -103,15 +101,15 @@ public class Enemy_behaviour : MonoBehaviour
         if (cooling)
         {
             Cooldown();
-            anim.SetBool("Attack", false);
+            //anim.SetBool("Attack", false);
         }
     }
 
     void Move()
     {
-        anim.SetBool("canWalk", true);
+        //anim.SetBool("canWalk", true);
 
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
+        //if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
         {
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
@@ -124,8 +122,8 @@ public class Enemy_behaviour : MonoBehaviour
         timer = intTimer; //Reset Timer when Player enter Attack Range
         attackMode = true; //To check if Enemy can still attack or not
         //Debug.Log("qwertyu");
-        anim.SetBool("canWalk", false);
-        anim.SetBool("Attack", true);
+        //anim.SetBool("canWalk", false);
+        //anim.SetBool("Attack", true);
         Debug.Log("runAttackAnim");
     }
 
@@ -144,7 +142,7 @@ public class Enemy_behaviour : MonoBehaviour
     {
         cooling = false;
         attackMode = false;
-        anim.SetBool("Attack", false);
+        //anim.SetBool("Attack", false);
     }
 
     void RaycastDebugger()
@@ -186,25 +184,25 @@ public class Enemy_behaviour : MonoBehaviour
         //Ternary Operator
         //target = distanceToLeft > distanceToRight ? leftLimit : rightLimit;
 
-        Flip();
+        //Flip();
     }
 
-    void Flip()
-    {
-        Vector3 rotation = transform.eulerAngles;
-        if (transform.position.x > target.position.x)
-        {
-            rotation.y = 180;
-        }
-        else
-        {
-            Debug.Log("Twist");
-            rotation.y = 0;
-        }
+    //void Flip()
+    //{
+    //    Vector3 rotation = transform.eulerAngles;
+    //    if (transform.position.x > target.position.x)
+    //    {
+    //        rotation.y = 180;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Twist");
+    //        rotation.y = 0;
+    //    }
 
-        //Ternary Operator
-        //rotation.y = (currentTarget.position.x < transform.position.x) ? rotation.y = 180f : rotation.y = 0f;
+    //    //Ternary Operator
+    //    //rotation.y = (currentTarget.position.x < transform.position.x) ? rotation.y = 180f : rotation.y = 0f;
 
-        transform.eulerAngles = rotation;
-    }
+    //    transform.eulerAngles = rotation;
+    //}
 }
