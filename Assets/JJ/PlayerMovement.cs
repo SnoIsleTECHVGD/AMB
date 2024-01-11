@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     bool readyToJump;
     int jumps;
+    private Animator animator;
 
     Rigidbody rb;
 
