@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/JJ/JJ.unity
     guid: cb5f5f1366fac5644ac090bfe75fac10
+  - enabled: 1
+    path: Assets/Ian/Credit scene.unity
+    guid: 206dffbf3626a5949abadd8b8d725522
   m_configObjects: {}
