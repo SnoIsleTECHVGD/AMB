@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight;
     public LayerMask whatIsGround;
     public bool grounded;
+    public bool moving;
 
     public Transform orientation;
 
@@ -74,7 +75,15 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            animator.SetBool("Moving", true);
+
+            if (moveDirection != Vector3.zero)
+            {
+                animator.SetBool("Moving", true);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
+            }
         }
         // in air
         else
