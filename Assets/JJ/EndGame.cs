@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collider)
+    public void OnTriggerEnter(Collider other)
     {
         SceneManager.LoadScene("1");
     }
