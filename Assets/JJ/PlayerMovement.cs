@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float jumpForce;
-    public float airMultiplier = 0.5f; // Adjust air movement multiplier
-    public float dragWhileMoving = 5f; // Adjust ground drag while moving
-    public int maxJumps = 2; // Adjust the maximum number of jumps
+    public float airMultiplier = 0.5f;
+    public float dragWhileMoving = 5f;
+    public int maxJumps = 2;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     int jumps;
     private Animator animator;
 
+    [HideInInspector]
+    public bool onJumpLeaf; // Change the access modifier to public
+
     Rigidbody rb;
 
     private void Start()
@@ -38,9 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
         MyInput();
     }
 
@@ -53,59 +54,59 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // Set drag while moving
         if (grounded)
             rb.drag = dragWhileMoving;
         else
             rb.drag = 0;
 
-        // when to jump
         if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
             Jump();
         }
+
+        // Check if the player is moving
+        moving = Mathf.Abs(horizontalInput) > 0.1f;
+
+        // Set a bool in the animator to control movement animation
+        animator.SetBool("Moving", moving);
     }
 
     private void MovePlayer()
     {
-        // calculate movement direction
         Vector3 moveDirection = orientation.forward * horizontalInput;
 
-        // on ground
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
-            if (moveDirection != Vector3.zero)
-            {
-                animator.SetBool("Moving", true);
-            }
-            else
-            {
-                animator.SetBool("Moving", false);
-            }
         }
-        // in air
         else
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-            animator.SetBool("Moving", false);
+            // Apply a force in the direction of input without normalizing
+            rb.AddForce(moveDirection * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
     }
 
     private void Jump()
     {
-        if (grounded || jumps < maxJumps)
+        if (grounded || jumps < maxJumps || onJumpLeaf)
         {
-            rb.AddForce(transform.up * Mathf.Sqrt(jumpForce * -2f * Physics.gravity.y), ForceMode.Impulse);
+            float modifiedJumpForce = onJumpLeaf ? jumpForce * 2f : jumpForce;
+            rb.AddForce(transform.up * Mathf.Sqrt(modifiedJumpForce * -2f * Physics.gravity.y), ForceMode.Impulse);
             readyToJump = false;
             jumps++;
+
+            onJumpLeaf = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         readyToJump = true;
-        jumps = 0; // Reset jumps when landing
+        jumps = 0;
+
+        if (collision.gameObject.CompareTag("JumpLeaf"))
+        {
+            onJumpLeaf = true;
+        }
     }
 }
