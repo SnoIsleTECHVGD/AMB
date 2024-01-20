@@ -1092,7 +1092,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 91961f07938e16e478bfca30aaddf596, type: 3}
   - {fileID: 2800000, guid: 39688b8416b716d4ebfebebf46007641, type: 3}
   rawImage: {fileID: 920098854}
-  titleScreenScene: {fileID: 102900000, guid: 34c51f301446df8478517770d22ec6fc, type: 3}
+  titleScreenSceneName: 1
 --- !u!4 &1979113655
 Transform:
   m_ObjectHideFlags: 0
