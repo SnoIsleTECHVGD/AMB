@@ -541,12 +541,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 967056357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab3bc56023a1b34b9e57699231d686a, type: 3}
+  m_Script: {fileID: 11500000, guid: 37c8d32f6d6ce174b8f9e5540bde6f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditSlides: []
-  rawImage: {fileID: 0}
-  titleScreenScene: {fileID: 102900000, guid: cb5f5f1366fac5644ac090bfe75fac10, type: 3}
+  targetScene: JJ
 --- !u!4 &967056359
 Transform:
   m_ObjectHideFlags: 0
@@ -738,8 +736,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 967056358}
-        m_TargetAssemblyTypeName: CreditManager, Assembly-CSharp
-        m_MethodName: GoToTitleScreen
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: ChangeToScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

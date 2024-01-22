@@ -1,38 +1,40 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class CreditManager : MonoBehaviour
 {
     public Texture2D[] creditSlides;
     public RawImage rawImage;
-    private int currentSlide = 0;
 
-    [SerializeField] private Object titleScreenScene; // Scene asset for the title screen
+    [SerializeField] private string titleScreenSceneName;
+
+    private int currentSlide = 0;
 
     void Start()
     {
-        if (rawImage != null)
+        if (rawImage == null)
         {
-            ShowSlide(currentSlide);
+            rawImage = GetComponent<RawImage>();
+            if (rawImage == null)
+            {
+                Debug.LogError("RawImage component not found. Make sure it's attached.");
+                return;
+            }
         }
-        else
-        {
-            Debug.LogError("RawImage component not found. Make sure it's attached.");
-        }
+
+        ShowSlide();
     }
 
-    void ShowSlide(int index)
+    void ShowSlide()
     {
-        if (rawImage != null && creditSlides != null && creditSlides.Length > 0)
+        if (creditSlides != null && creditSlides.Length > 0)
         {
-            // Set the texture of the Raw Image to the current slide
-            rawImage.texture = creditSlides[index];
+            rawImage.texture = creditSlides[currentSlide];
         }
         else
         {
-            Debug.LogError("RawImage component, creditSlides array, or creditSlides length is not properly set up.");
+            Debug.LogError("Credit slides array is not properly set up.");
         }
     }
 
@@ -41,7 +43,7 @@ public class CreditManager : MonoBehaviour
         if (creditSlides != null && creditSlides.Length > 0)
         {
             currentSlide = (currentSlide + 1) % creditSlides.Length;
-            ShowSlide(currentSlide);
+            ShowSlide();
         }
     }
 
@@ -50,29 +52,19 @@ public class CreditManager : MonoBehaviour
         if (creditSlides != null && creditSlides.Length > 0)
         {
             currentSlide = (currentSlide - 1 + creditSlides.Length) % creditSlides.Length;
-            ShowSlide(currentSlide);
+            ShowSlide();
         }
     }
 
     public void GoToTitleScreen()
     {
-        if (titleScreenScene != null && titleScreenScene is SceneAsset)
+        if (!string.IsNullOrEmpty(titleScreenSceneName))
         {
-            string scenePath = AssetDatabase.GetAssetPath(titleScreenScene);
-            SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
-
-            if (sceneAsset != null)
-            {
-                SceneManager.LoadScene(sceneAsset.name);
-            }
-            else
-            {
-                Debug.LogError("Invalid scene asset selected. Make sure it's a valid scene asset.");
-            }
+            SceneManager.LoadScene(titleScreenSceneName);
         }
         else
         {
-            Debug.LogError("Title screen scene asset not set. Please assign a valid scene asset in the inspector.");
+            Debug.LogError("Title screen scene name is not set. Please assign a valid scene name in the inspector.");
         }
     }
 }
