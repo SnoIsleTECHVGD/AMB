@@ -1090,7 +1090,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9de0a82d6a40ba74d9c033382250e125, type: 3}
   - {fileID: 2800000, guid: b78c9ed99c080c74ea389cfd8e656a2c, type: 3}
   - {fileID: 2800000, guid: 91961f07938e16e478bfca30aaddf596, type: 3}
-  - {fileID: 2800000, guid: 39688b8416b716d4ebfebebf46007641, type: 3}
+  - {fileID: 2800000, guid: 0af6c4c2597bafd44bdac9a8dcfc21fd, type: 3}
   rawImage: {fileID: 920098854}
   titleScreenSceneName: 1
 --- !u!4 &1979113655
