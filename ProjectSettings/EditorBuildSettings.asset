@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ian/Win Screen.unity
     guid: 9baac4f8a1708d849803e98450af1d64
+  - enabled: 1
+    path: Assets/Ian/Player Guide.unity
+    guid: f3c6b14016a94854d8e9aa8305ce7da9
   m_configObjects: {}
