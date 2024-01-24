@@ -8,7 +8,15 @@ public class button : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Menu.SetActive(true);
+        if (Menu.activeInHierarchy)
+        {
+            Menu.SetActive(false);
+        }
+        else
+        {
+            Menu.SetActive(true);
+        }
     }
+    
 
 }
