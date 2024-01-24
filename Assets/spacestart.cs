@@ -14,7 +14,7 @@ public class spacestart : MonoBehaviour
         {
             if (isGameStarted)
             {
-                PlayerObj.gameObject.GetComponent<PlayerMovement>().enabled = false;
+               
                 PauseGame();
             }
             else
